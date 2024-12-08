@@ -23,7 +23,9 @@ _Tecnologías utilizadas:_
 
 -Javascript, HTML, CSS
 
--Node.js
+-PHP
+
+-MySQL
 
 _Referencias:_
 
