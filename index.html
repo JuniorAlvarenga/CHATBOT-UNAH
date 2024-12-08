@@ -3,61 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chatbot</title>
+    <title>UNAH</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 20px; }
         .chatbox { width: 100%; max-width: 600px; margin: auto; border: 1px solid #ccc; padding: 20px; border-radius: 5px; }
-        .mensajes { max-height: 300px; overflow-y: auto; margin-bottom: 20px; }
-        .mensajes p { margin: 5px 0; }
-        .usuario { text-align: right; color: blue; }
+        .messages { max-height: 300px; overflow-y: auto; margin-bottom: 20px; }
+        .messages p { margin: 5px 0; }
+        .user { text-align: right; color: blue; }
         .bot { text-align: left; color: green; }
     </style>
 </head>
 <body>
-    <h1>Chatbot</h1>
+    <h1>Universidad Nacional Autonoma de Honduras</h1>
     <div class="chatbox">
-        <div class="mensajes" id="mensajes"></div>
-        <textarea id="contexto" rows="3" cols="60" placeholder="Escribe el contexto"></textarea>
-        <br><br>
-        <input id="pregunta" type="text" placeholder="Haz tu pregunta aquí" size="50">
-        <button id="enviar">Enviar</button>
+<!--         <div class="messages" id="messages"></div>
+        <textarea id="context" rows="3" cols="60" placeholder="Contexto inicial"></textarea>
+        <br><br> -->
+        <p id="messages"></p>
+        <input id="question" type="text" placeholder="Haz tu pregunta aquí" size="50">
+        <button id="send">Enviar</button>
     </div>
-    <script>
-        const token = "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"; // Token de Hugging Face
-        const modelo = "mrm8488/bert-base-spanish-wwm-cased-finetuned-spa-squad2-es"; // Modelo en uso
-
-        // Función para enviar la pregunta al modelo y obtener una respuesta
-        async function preguntarAlBot(contexto, pregunta) {
-            const respuesta = await fetch(`https://api-inference.huggingface.co/models/${modelo}`, {
-                headers: { Authorization: `Bearer ${token}` },
-                method: "POST",
-                body: JSON.stringify({ inputs: { question: pregunta, context: contexto } }),
-            });
-            const datos = await respuesta.json();
-            return datos.answer || "No tengo una respuesta para eso.";
-        }
-
-        // Evento al hacer clic en el botón Enviar
-        document.getElementById("enviar").addEventListener("click", async () => {
-            const contexto = document.getElementById("contexto").value.trim();
-            const pregunta = document.getElementById("pregunta").value.trim();
-
-            if (!contexto || !pregunta) {
-                alert("Por favor, introduce el contexto y una pregunta.");
-                return;
-            }
-
-            // Mostrar la pregunta en la interfaz
-            const mensajes = document.getElementById("mensajes");
-            mensajes.innerHTML += `<p class="usuario"><strong>Tú:</strong> ${pregunta}</p>`;
-
-            // Obtener la respuesta del bot
-            const respuesta = await preguntarAlBot(contexto, pregunta);
-            mensajes.innerHTML += `<p class="bot"><strong>Bot:</strong> ${respuesta}</p>`;
-
-            // Limpiar el campo de la pregunta
-            document.getElementById("pregunta").value = "";
-        });
-    </script>
+    <script src="proyecto_IA.js"></script>
 </body>
 </html>
