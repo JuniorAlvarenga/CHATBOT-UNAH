@@ -39,7 +39,12 @@
         <div id="messages" class="messages">
             <!-- Aquí aparecerán los mensajes -->
         </div>
+        <!-- Select para elegir el tema -->
         <div class="input-container">
+            <select id="temasSelect" class="styled-select">
+                <option value="">Seleccione un tema</option> 
+                <!-- Las opciones se manejarán dinámicamente desde JavaScript -->
+            </select>
             <input id="question" type="text" placeholder="Haz tu pregunta aquí">
             <button id="send">Enviar</button>
         </div>
@@ -47,3 +52,4 @@
     <script src="proyecto_IA.js"></script>
 </body>
 </html>
+

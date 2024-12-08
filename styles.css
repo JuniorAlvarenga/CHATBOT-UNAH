@@ -24,7 +24,7 @@ h1 {
 .chatbox {
     width: 100%;
     max-width: 600px;
-    background: rgba(255, 215, 0, 0.9); 
+    background: rgba(255, 215, 0, 0.75); 
     backdrop-filter: blur(5px);
     border-radius: 15px;
     padding: 20px;
@@ -73,4 +73,43 @@ button {
 
 button:hover {
     background-color: #00277D;
+}
+
+/* Estilo general */
+.styled-select {
+    width: 100%; /* Hazlo adaptativo al contenedor */
+    max-width: 400px; /* Define un ancho máximo */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    font-size: 16px;
+    color: #333;
+    outline: none;
+    appearance: none; /* Oculta el icono predeterminado del navegador */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+/* Cambia el icono de flecha (solo para navegadores modernos) */
+.styled-select {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23333" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 5.646a.5.5 0 0 1 .708 0L8 11.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 16px;
+}
+
+/* Hover */
+.styled-select:hover {
+    border-color: #888;
+    background-color: #f4f4f4;
+}
+
+/* Focus */
+.styled-select:focus {
+    border-color: #5b9bd5;
+    box-shadow: 0 0 5px rgba(91, 155, 213, 0.5);
 }
