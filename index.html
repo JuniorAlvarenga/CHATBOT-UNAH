@@ -1,27 +1,48 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UNAH</title>
-    <style>
+    <link rel="stylesheet" href="styles.css">
+   <style>
         body { font-family: Arial, sans-serif; margin: 20px; }
         .chatbox { width: 100%; max-width: 600px; margin: auto; border: 1px solid #ccc; padding: 20px; border-radius: 5px; }
         .messages { max-height: 300px; overflow-y: auto; margin-bottom: 20px; }
         .messages p { margin: 5px 0; }
         .user { text-align: right; color: blue; }
         .bot { text-align: left; color: green; }
-    </style>
+    </style>-
 </head>
 <body>
     <h1>Universidad Nacional Autonoma de Honduras</h1>
     <div class="chatbox">
-<!--         <div class="messages" id="messages"></div>
-        <textarea id="context" rows="3" cols="60" placeholder="Contexto inicial"></textarea>
-        <br><br> -->
         <p id="messages"></p>
         <input id="question" type="text" placeholder="Haz tu pregunta aquí" size="50">
         <button id="send">Enviar</button>
+    </div>
+    <script src="proyecto_IA.js"></script>
+</body>
+</html>-->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UNAH Chatbot</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    
+    <div class="chatbox">
+        <div id="messages" class="messages">
+            <!-- Aquí aparecerán los mensajes -->
+        </div>
+        <div class="input-container">
+            <input id="question" type="text" placeholder="Haz tu pregunta aquí">
+            <button id="send">Enviar</button>
+        </div>
     </div>
     <script src="proyecto_IA.js"></script>
 </body>
