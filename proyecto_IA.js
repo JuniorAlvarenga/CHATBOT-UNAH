@@ -1,5 +1,5 @@
 const token = "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"; // token de Hugging Face
-const model = "mrm8488/bert-base-spanish-wwm-cased-finetuned-spa-squad2-es";
+const model = "mrm8488/bert-base-spanish-wwm-cased-finetuned-spa-squad2-es"; //Nombre y direccion del modelo
 
 async function askBot(context, question) {
     const response = await fetch(`https://api-inference.huggingface.co/models/${model}`, {
@@ -12,47 +12,66 @@ async function askBot(context, question) {
 }
 
 document.getElementById("send").addEventListener("click", async () => {
-   // const context = document.getElementById("context").value.trim();
     const question = document.getElementById("question").value.trim();
-
-/*     if (!question) {
-        alert("Por favor, introduce el contexto y una pregunta.");
+    let tema_id = document.getElementById("temasSelect").value;
+    console.log(tema_id);
+    if (!question) {
+        alert("Por favor, introduce una pregunta.");
         return;
     }
- */
-        // Realizar la solicitud al archivo PHP
-            const response = await fetch("http://localhost:8000/conexion.php", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                //body: JSON.stringify({ data }),
-            });
-            const data = response.json(); 
-            data.then((resultado) => {
-                const temaHistorial = resultado.data.tema_historial;
-                console.log(temaHistorial);
-                const answer =  askBot(temaHistorial, question);
-                answer.then((resultado2) => {
-                    console.log("Resultado:", resultado2); 
-                    const messages = document.getElementById("messages");
-                    messages.innerHTML += `<p class="user"><strong>Tú:</strong> ${question}</p>`;
-                    messages.innerHTML += `<p class="bot"><strong>Bot:</strong> ${resultado2}</p>`; 
-                })
-             /*    */
-            })
-            //messages.innerHTML += `<p class="bot"><strong>Bot:</strong> ${data.answer}</p>`;
+    if (!tema_id) {
+        alert("Por favor, elige un tema");
+        return;
+    }
 
-
-
-    // Mostrar la pregunta en la interfaz
-/*     const messages = document.getElementById("messages");
-    messages.innerHTML += `<p class="user"><strong>Tú:</strong> ${question}</p>`;
-
-    // Obtener respuesta del bot
-    //const answer = await askBot(context, question);
-    messages.innerHTML += `<p class="bot"><strong>Bot:</strong> ${answer}</p>`; */
-
-    // Limpiar el campo de la pregunta
+    const response = await fetch("http://localhost:8000/conexion.php?tema_id="+tema_id, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        //body: JSON.stringify({ data }),
+    });
+    const data = response.json(); 
+    data.then((resultado) => {
+        const temaHistorial = resultado.data.tema_historial;
+        console.log(temaHistorial);
+        const answer =  askBot(temaHistorial, question);
+        answer.then((resultado2) => {
+            console.log("Resultado:", resultado2); 
+            const messages = document.getElementById("messages");
+            messages.innerHTML += `<p class="user"><strong>Tú:</strong> ${question}</p>`;
+            messages.innerHTML += `<p class="bot"><strong>Bot:</strong> ${resultado2}</p>`; 
+        })
+    })
     document.getElementById("question").value = "";
+});
+
+async function cargarTemas() {
+  const response = await fetch('http://localhost:8000/tema.php', {
+     method: "POST",
+     headers: {
+        "Content-Type": "application/json",
+     },
+  });
+  const data = await response.json(); 
+  const select = document.getElementById('temasSelect');
+  let optionsHTML = ''; 
+  data.data.forEach(item => {
+    optionsHTML += `<option value="${item.tema_id}">${item.tema}</option>`; 
+  });
+  select.innerHTML += optionsHTML;
+}
+
+document.addEventListener('DOMContentLoaded', cargarTemas);
+
+document.addEventListener("DOMContentLoaded", () => {
+    const messages = document.getElementById("messages");
+
+    // Crear mensaje inicial del bot
+    const botMessage = document.createElement("p");
+    botMessage.className = "bot"; // Aplica estilo de mensaje del bot
+    botMessage.textContent = "Bot: ¡Hola! Soy el ChatBot de la UNAH. Elige un tema especifico para responder tus preguntas";
+
+    // Añadir mensaje inicial al contenedor de mensajes
+    messages.appendChild(botMessage);
 });
