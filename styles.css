@@ -1,35 +1,62 @@
 /* Estilo general */
 body {
+    position: relative; 
     margin: 0;
     font-family: Arial, sans-serif;
-    background: #FFFFFF; /* Fondo blanco fijo */
+    background: #FFFFFF;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    color: #333; /* Color del texto para contraste */
-    background: url('./img/fondo.png') no-repeat center center; /* Ruta de la imagen */
+    color: #333;
+    background: url('./img/fondo.png') no-repeat center center;
     background-size: contain;
 }
 
-/* Encabezado */
-h1 {
-    text-align: center;
-    margin-bottom: 20px;
+/* Borde triple con líneas amarilla, azul y amarilla */
+body:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0px;
+    z-index: 0; /* Detrás de todo */
+    border: 5px solid #FFD700; 
+    box-shadow: inset 0 0 0 5px #0033A1, 
+                inset 0 0 0 10px #FFD700; 
+    pointer-events: none; /* Para que no interfiera con clics */
+}
+
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px; 
+}
+
+/* Título del chatbot */
+#chat-title {
     font-size: 24px;
-    color: #0033A1; /* Azul UNAH */
+    color: #0033A1; 
+    text-align: center;
+    margin: 0;
 }
 
 /* Estilo del contenedor de chat */
 .chatbox {
+    position: relative;
+    z-index: 1; 
     width: 100%;
     max-width: 600px;
-    background: rgba(255, 215, 0, 0.75); 
+    background: rgba(255, 215, 0, 0.8);
     backdrop-filter: blur(5px);
     border-radius: 15px;
     padding: 20px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
+
 
 /* Mensajes */
 .messages {
@@ -38,7 +65,7 @@ h1 {
     margin-bottom: 20px;
     padding: 10px;
     border-radius: 10px;
-    background: rgba(245, 245, 245, 1); /* Gris claro para mensajes */
+    background: rgba(245, 245, 245, 1); 
     box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -49,8 +76,15 @@ h1 {
     gap: 10px;
 }
 
+.input-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
 input[type="text"] {
-    flex-grow: 1;
+    flex-grow: 1; /* Permite que crezca dinámicamente */
+    width: 70%; 
     padding: 10px;
     font-size: 14px;
     border: 1px solid #ccc;
@@ -75,10 +109,10 @@ button:hover {
     background-color: #00277D;
 }
 
-/* Estilo general */
+/* Estilo general del Select */
 .styled-select {
-    width: 100%; /* Hazlo adaptativo al contenedor */
-    max-width: 400px; /* Define un ancho máximo */
+    width: 100%; 
+    max-width: 400px; 
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -86,7 +120,7 @@ button:hover {
     font-size: 16px;
     color: #333;
     outline: none;
-    appearance: none; /* Oculta el icono predeterminado del navegador */
+    appearance: none; 
     -webkit-appearance: none;
     -moz-appearance: none;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -94,7 +128,7 @@ button:hover {
     cursor: pointer;
 }
 
-/* Cambia el icono de flecha (solo para navegadores modernos) */
+/* Cambia el icono de flecha (*/
 .styled-select {
     background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23333" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 5.646a.5.5 0 0 1 .708 0L8 11.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');
     background-repeat: no-repeat;
@@ -105,11 +139,26 @@ button:hover {
 /* Hover */
 .styled-select:hover {
     border-color: #888;
-    background-color: #f4f4f4;
+    background-color: #5cf55c;
 }
 
 /* Focus */
 .styled-select:focus {
     border-color: #5b9bd5;
     box-shadow: 0 0 5px rgba(91, 155, 213, 0.5);
+}
+
+/* Mensajes del bot */
+.bot {
+    text-align: left;
+    color: green;
+    font-style: italic;
+    font-weight: bolder;
+    margin: 5px 0;
+}
+
+.user {
+    text-align: right;
+    color: blue;
+    font-weight: bold;
 }
